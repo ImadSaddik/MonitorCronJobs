@@ -1,0 +1,18 @@
+[project]
+name = "monitorcronjobs"
+version = "0.1.0"
+description = "A monitoring suite for Ubuntu that tracks your automated tasks. Includes a system tray app for peace of mind and a CLI tool for quick terminal reports."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pygobject>=3.54.5",
+    "rich>=14.3.1",
+]
+
+[dependency-groups]
+dev = [
+    "pygobject-stubs>=2.16.0",
+]
+
+[tool.pyright]
+reportMissingModuleSource = false
