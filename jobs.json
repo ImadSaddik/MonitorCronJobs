@@ -1,0 +1,22 @@
+{
+	"jobs": [
+		{
+			"name": "Llama.cpp update",
+			"frequency": "daily",
+			"log_pattern": "~/Programs/logs/llama.cpp/llama_cpp_update_*.log",
+			"process_pattern": "update-llama-cpp"
+		},
+		{
+			"name": "Setup rkhis scrape",
+			"frequency": "daily",
+			"log_pattern": "~/Projects/SetupRkhis/logs/scrapers/daily_scrape_*.log",
+			"process_pattern": "setup-rkhis-scrape-daily"
+		},
+		{
+			"name": "YouTube music backup",
+			"frequency": "weekly",
+			"log_pattern": "~/Projects/BackUpYouTubeMusic/logs/weekly_backup_*.log",
+			"process_pattern": "backup-yt-music"
+		}
+	]
+}
