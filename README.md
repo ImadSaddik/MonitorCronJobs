@@ -65,16 +65,18 @@ Save this template as `/etc/cron.daily/job-name` (must be executable and root-ow
 set -e
 
 TARGET_USER="your_username"
-PROJECT_DIR="/home/$TARGET_USER/Projects/MyProject"
-WORKER_SCRIPT="$PROJECT_DIR/worker.sh"
-LOG_DIR="$PROJECT_DIR/logs"
+LOG_DIR="/home/$TARGET_USER/Projects/MyProject/logs"
 LOG_FILE="$LOG_DIR/job_name_$(date +%Y-%m-%d).log"
+
+# The command you want to run.
+# This can be a script path OR a chain of commands (Conda, cd, python, etc.)
+WORKER_CMD="/home/$TARGET_USER/Projects/MyProject/worker.sh"
 
 mkdir -p "$LOG_DIR"
 touch "$LOG_FILE"
 chown -R $TARGET_USER:$TARGET_USER "$LOG_DIR"
 
-# Redirect all output to log
+# Redirect all output (stdout and stderr) to log
 exec >> "$LOG_FILE" 2>&1
 
 echo "[JOB STARTED] $(date)"
@@ -86,8 +88,8 @@ handle_error() {
 }
 trap 'handle_error' ERR
 
-# Run the worker as the normal user
-su - $TARGET_USER -c "$WORKER_SCRIPT"
+# Run the command as the target user
+su - $TARGET_USER -c "$WORKER_CMD"
 
 echo "[JOB SUCCEEDED] $(date)"
 exit 0
@@ -116,7 +118,7 @@ Then add your jobs configuration:
             "name": "Backup music",
             "frequency": "weekly",
             "log_pattern": "/home/your_username/logs/backup_*.log",
-            "process_pattern": "backup_music.sh"
+            "process_pattern": "backup_music"
         }
     ]
 }
@@ -127,6 +129,10 @@ Configuration breakdown:
 - **`frequency`**: How often the job should run. Accepted values are: `daily`, `weekly`, `monthly`.
 - **`log_pattern`**: A glob pattern to find the log files. The monitor always reads the newest file matching this pattern.
 - **`process_pattern`**: The name of the script or command (used by `pgrep -f`). If found, the status becomes **⏳ RUNNING** immediately.
+
+    > [!TIP]
+    >
+    > Use the name of your wrapper script (e.g., if your wrapper is `/etc/cron.daily/backup_music`, use `"process_pattern": "backup_music"`).
 
 ## Usage
 
