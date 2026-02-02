@@ -144,45 +144,44 @@ The CLI tool checks job status from the terminal.
 
 ```bash
 # Quick status check
-monitor-cli
+cron-status
 
 # View the latest log for a specific job (by ID)
-monitor-cli 1
+cron-status 1
 ```
 
 > [!NOTE]
 >
-> `monitor-cli` is an alias created during installation. It is equivalent to running `uv run python -m monitor_cron.cli`, but can be called from anywhere.
+> `cron-status` is the command defined in the project. It is equivalent to running `uv run python -m monitor_cron.cli`.
 
-If you want to run the CLI tool from anywhere, follow these steps:
+To run this command globally (from any terminal without manually activating the environment):
 
 1. Create a new file in `/usr/local/bin/`:
 
     ```bash
-    sudo nano /usr/local/bin/cron_status
+    sudo nano /usr/local/bin/cron-status
     ```
 
-2. Paste the following content (update the paths to match your system):
+2. Paste the following content (update `PROJECT_DIR` to match your system):
 
     ```bash
     #!/bin/bash
     PROJECT_DIR="$HOME/Projects/MonitorCronJobs"
 
-    # Ensure uv is used to run the project
-    uv run --directory "$PROJECT_DIR" monitor-cli "$@"
+    uv run --directory "$PROJECT_DIR" cron-status "$@"
     ```
 
 3. Make the file executable:
 
     ```bash
-    sudo chmod +x /usr/local/bin/cron_status
+    sudo chmod +x /usr/local/bin/cron-status
     ```
 
-Now you can run `cron_status` from any terminal!
+Now you can run `cron-status` from any terminal!
 
 ```bash
-cron_status
-cron_status 1
+cron-status
+cron-status 1
 ```
 
 ### System tray app
@@ -190,19 +189,19 @@ cron_status 1
 You can run the system tray app manually:
 
 ```bash
-monitor-tray
+cron-tray
 ```
 
 > [!NOTE]
 >
-> `monitor-tray` is an alias created during installation. It is equivalent to running `uv run python -m monitor_cron.tray`, but can be called from anywhere.
+> `cron-tray` is the command defined in the project. It is equivalent to running `uv run python -m monitor_cron.tray`.
 
 Or you can set it to start automatically on login.
 
 1. Create a `.desktop` file:
 
     ```bash
-    nano ~/.config/autostart/cron_status.desktop
+    nano ~/.config/autostart/cron-monitor.desktop
     ```
 
 2. Paste the following content (update the paths to match your system):
@@ -210,10 +209,10 @@ Or you can set it to start automatically on login.
     ```ini
     [Desktop Entry]
     Type=Application
-    Name=Cron status
+    Name=Cron monitor
     Comment=Monitors the status of cron jobs
     # Update the path to point to your project folder
-    Exec=/usr/bin/env uv run --directory /home/your_username/Projects/MonitorCronJobs monitor-tray
+    Exec=/usr/bin/env uv run --directory /home/your_username/Projects/MonitorCronJobs cron-tray
     Path=/home/your_username/Projects/MonitorCronJobs
     Icon=utilities-system-monitor
     Terminal=false

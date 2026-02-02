@@ -11,8 +11,8 @@ dependencies = [
 ]
 
 [project.scripts]
-monitor-cli = "monitor_cron.cli:main"
-monitor-tray = "monitor_cron.tray:main"
+cron-status = "monitor_cron.cli:main"
+cron-tray = "monitor_cron.tray:main"
 
 [build-system]
 requires = ["hatchling"]
