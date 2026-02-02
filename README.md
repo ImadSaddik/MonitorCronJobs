@@ -130,9 +130,9 @@ Configuration breakdown:
 - **`log_pattern`**: A glob pattern to find the log files. The monitor always reads the newest file matching this pattern.
 - **`process_pattern`**: The name of the script or command (used by `pgrep -f`). If found, the status becomes **⏳ RUNNING** immediately.
 
-    > [!TIP]
-    >
-    > Use the name of your wrapper script (e.g., if your wrapper is `/etc/cron.daily/backup_music`, use `"process_pattern": "backup_music"`).
+> [!TIP]
+>
+> Use the name of your wrapper script (e.g., if your wrapper is `/etc/cron.daily/backup_music`, use `"process_pattern": "backup_music"`).
 
 ## Usage
 
