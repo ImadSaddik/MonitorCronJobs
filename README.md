@@ -11,7 +11,7 @@ This project uses a **calendar-based state machine** to verify that jobs ran wit
 
 The system tray menu showing the daily job list (left) and the detailed status view for a specific task (right).
 
-https://github.com/user-attachments/assets/79dc0905-51a4-4a0b-aec1-95f51dd36ce3
+[https://github.com/user-attachments/assets/79dc0905-51a4-4a0b-aec1-95f51dd36ce3](https://github.com/user-attachments/assets/79dc0905-51a4-4a0b-aec1-95f51dd36ce3)
 
 The CLI interface allows for rapid status checks and instant log inspection by job ID.
 
@@ -22,7 +22,7 @@ The CLI interface allows for rapid status checks and instant log inspection by j
 Since this project uses [GTK](https://www.gtk.org/) and `AppIndicators` for the system tray, the following system libraries are required:
 
 ```bash
-# Ubuntu 24.04 / 25.10
+# Ubuntu 24.04+
 sudo apt install python3-gi python3-gi-cairo gir1.2-gtk-3.0 gir1.2-ayatanaappindicator3-0.1 libgirepository1.0-dev libcairo2-dev
 ```
 
