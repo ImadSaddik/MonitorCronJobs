@@ -224,7 +224,7 @@ Or you can set it to start automatically on login.
 > [!WARNING]
 > Use absolute paths in the `.desktop` file (not `~`), as tilde expansion may not work reliably.
 
-## Licence
+## License
 
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
 
