@@ -35,27 +35,19 @@ Explanation of packages:
 
 ### Python environment
 
-Create and activate a new Python environment using [conda](https://anaconda.org/anaconda/conda) or python's built-in [venv](https://docs.python.org/3/library/venv.html) module:
+This project uses [uv](https://docs.astral.sh/uv/) for dependency management.
 
-```bash
-# Create a new conda environment and activate it:
-conda create -n monitor_jobs python=3.12 -y
-conda activate monitor_jobs
+1. Install uv (if not already installed):
 
-# If you prefer using venv:
-python -m venv .venv
-source .venv/bin/activate # On Windows use: .venv\Scripts\activate
-```
+    ```bash
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+    ```
 
-Install the dependencies using `pip` or [uv](https://docs.astral.sh/uv/) (recommended).
+2. Install the project dependencies:
 
-```bash
-# Using uv (Recommended)
-uv sync
-
-# Using pip
-pip install -e .
-```
+    ```bash
+    uv sync
+    ```
 
 ## Configuration
 
