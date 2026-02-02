@@ -36,8 +36,8 @@ def main() -> None:
         table.add_column("Details", style="dim")
 
         for i, job in enumerate(jobs, 1):
-            s, d = check_job(job)
-            table.add_row(str(i), s, job.name, d)
+            status_display, details = check_job(job)
+            table.add_row(str(i), status_display, job.name, details)
 
         console.print(table)
 
