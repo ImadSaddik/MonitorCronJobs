@@ -136,10 +136,10 @@ The CLI tool checks job status from the terminal.
 
 ```bash
 # Quick status check
-cron-status
+uv run cron-status
 
 # View the latest log for a specific job (by ID)
-cron-status 1
+uv run cron-status 1
 ```
 
 > [!NOTE]
@@ -181,7 +181,7 @@ cron-status 1
 You can run the system tray app manually:
 
 ```bash
-cron-tray
+uv run cron-tray
 ```
 
 > [!NOTE]
