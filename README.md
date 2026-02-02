@@ -8,10 +8,12 @@ This project is a monitoring suite for Ubuntu that automates the tracking of cro
 This project uses a **calendar-based state machine** to verify that jobs ran within their designated schedule (e.g., *today* or *this week*). This prevents "silent failures" where a task stops running entirely, but the old successful log remains in place.
 
 ![System tray application interface showing job list and detailed view](./images/system_tray_app_states.svg)
-*The system tray menu showing the daily job list (left) and the detailed status view for a specific task (right).*
+
+The system tray menu showing the daily job list (left) and the detailed status view for a specific task (right).
 
 https://github.com/user-attachments/assets/79dc0905-51a4-4a0b-aec1-95f51dd36ce3
-*The CLI interface allows for rapid status checks and instant log inspection by job ID.*
+
+The CLI interface allows for rapid status checks and instant log inspection by job ID.
 
 ## Environment setup
 
