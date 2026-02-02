@@ -5,6 +5,7 @@ description = "A monitoring suite for Ubuntu that tracks your automated tasks. I
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "pydantic>=2.12.5",
     "pygobject>=3.54.5",
     "rich>=14.3.1",
 ]
@@ -12,6 +13,7 @@ dependencies = [
 [dependency-groups]
 dev = [
     "pygobject-stubs>=2.16.0",
+    "pytest>=9.0.2",
 ]
 
 [tool.pyright]
