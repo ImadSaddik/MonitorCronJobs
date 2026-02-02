@@ -30,14 +30,14 @@ def load_jobs() -> list[Job]:
 def get_job_state(job: Job) -> JobState:
     """Returns a JobState object representing the current state of the job."""
 
+    latest_file = get_latest_log_file(job)
+
     if is_job_running(job.process_pattern):
         return JobState(
             status=JobStatus.RUNNING,
             message="Process active",
-            file=get_latest_log_file(job),
+            file=latest_file,
         )
-
-    latest_file = get_latest_log_file(job)
 
     if not latest_file:
         return JobState(status=JobStatus.MISSING, message="No logs found", file=None)
