@@ -3,8 +3,8 @@ from pathlib import Path
 
 from pytest import MonkeyPatch
 
-import core
-from enums import JobFrequency
+from monitor_cron import core
+from monitor_cron.enums import JobFrequency
 
 
 class TestLoadJobs:

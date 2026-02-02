@@ -4,9 +4,9 @@ from pathlib import Path
 
 from pytest import MonkeyPatch
 
-import core
-from enums import JobStatus
-from models import Job
+from monitor_cron import core
+from monitor_cron.enums import JobStatus
+from monitor_cron.models import Job
 
 
 class TestAnalyzeLogFile:

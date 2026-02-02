@@ -7,8 +7,8 @@ from typing import Any, Generator
 
 import pytest
 
-from enums import JobFrequency, JobStatus
-from models import Job, JobState
+from monitor_cron.enums import JobFrequency, JobStatus
+from monitor_cron.models import Job, JobState
 
 
 @pytest.fixture

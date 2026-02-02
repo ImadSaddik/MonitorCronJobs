@@ -1,7 +1,7 @@
 import subprocess
 from unittest.mock import patch
 
-import core
+from monitor_cron import core
 
 
 class TestIsJobRunning:

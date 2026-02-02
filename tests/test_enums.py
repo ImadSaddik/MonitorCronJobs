@@ -1,4 +1,4 @@
-from enums import JobFrequency, JobStatus
+from monitor_cron.enums import JobFrequency, JobStatus
 
 
 class TestJobFrequency:

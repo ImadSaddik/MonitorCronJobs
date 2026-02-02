@@ -2,7 +2,7 @@ from datetime import datetime
 
 from pydantic import BaseModel
 
-from enums import JobFrequency, JobStatus
+from .enums import JobFrequency, JobStatus
 
 
 class Job(BaseModel):

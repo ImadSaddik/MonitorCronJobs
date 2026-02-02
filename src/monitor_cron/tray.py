@@ -5,9 +5,9 @@ from typing import Any, Callable
 
 import gi
 
-import core
-from enums import JobStatus
-from models import Job, JobState
+from . import core
+from .enums import JobStatus
+from .models import Job, JobState
 
 gi.require_version("Gtk", "3.0")
 gi.require_version("Gdk", "3.0")

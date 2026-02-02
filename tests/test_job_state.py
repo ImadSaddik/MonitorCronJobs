@@ -3,9 +3,9 @@ from datetime import datetime
 from pathlib import Path
 from unittest.mock import patch
 
-import core
-from enums import JobStatus
-from models import Job
+from monitor_cron import core
+from monitor_cron.enums import JobStatus
+from monitor_cron.models import Job
 
 
 class TestGetJobState:

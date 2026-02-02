@@ -5,11 +5,13 @@ import subprocess
 from datetime import datetime
 from typing import Callable
 
-from enums import JobFrequency, JobStatus
-from models import Job, JobState
+from .enums import JobFrequency, JobStatus
+from .models import Job, JobState
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-JOBS_FILE = os.path.join(BASE_DIR, "jobs.json")
+# Navigate up from src/monitor_cron/ to project root
+PROJECT_ROOT = os.path.dirname(os.path.dirname(BASE_DIR))
+JOBS_FILE = os.path.join(PROJECT_ROOT, "jobs.json")
 
 MARKER_FAILED = "[JOB FAILED]"
 MARKER_SUCCESS = "[JOB SUCCEEDED]"

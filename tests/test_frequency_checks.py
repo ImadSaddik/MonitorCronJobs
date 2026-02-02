@@ -1,7 +1,7 @@
 from datetime import datetime
 
-import core
-from enums import JobFrequency
+from monitor_cron import core
+from monitor_cron.enums import JobFrequency
 
 
 class TestFrequencyCheckFunctions:

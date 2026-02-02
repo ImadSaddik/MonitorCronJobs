@@ -3,8 +3,8 @@ from datetime import datetime
 import pytest
 from pydantic import ValidationError
 
-from enums import JobFrequency, JobStatus
-from models import Job, JobState
+from monitor_cron.enums import JobFrequency, JobStatus
+from monitor_cron.models import Job, JobState
 
 
 class TestJob:

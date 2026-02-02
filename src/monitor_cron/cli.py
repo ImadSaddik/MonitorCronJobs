@@ -7,9 +7,9 @@ from rich.panel import Panel
 from rich.table import Table
 from rich.text import Text
 
-import core
-from enums import JobStatus
-from models import Job
+from . import core
+from .enums import JobStatus
+from .models import Job
 
 console = Console()
 
