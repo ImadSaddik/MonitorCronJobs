@@ -72,14 +72,15 @@ Save this template as `/etc/cron.daily/job-name` (must be executable and root-ow
 #!/bin/bash
 set -e
 
-USER_NAME="imad-saddik"
-WORKER_SCRIPT="/home/$USER_NAME/Projects/MyProject/worker.sh"
-LOG_DIR="/home/$USER_NAME/Projects/MyProject/logs"
+TARGET_USER="your_username"
+PROJECT_DIR="/home/$TARGET_USER/Projects/MyProject"
+WORKER_SCRIPT="$PROJECT_DIR/worker.sh"
+LOG_DIR="$PROJECT_DIR/logs"
 LOG_FILE="$LOG_DIR/job_name_$(date +%Y-%m-%d).log"
 
 mkdir -p "$LOG_DIR"
 touch "$LOG_FILE"
-chown -R $USER_NAME:$USER_NAME "$LOG_DIR"
+chown -R $TARGET_USER:$TARGET_USER "$LOG_DIR"
 
 # Redirect all output to log
 exec >> "$LOG_FILE" 2>&1
@@ -94,7 +95,7 @@ handle_error() {
 trap 'handle_error' ERR
 
 # Run the worker as the normal user
-su - $USER_NAME -c "$WORKER_SCRIPT"
+su - $TARGET_USER -c "$WORKER_SCRIPT"
 
 echo "[JOB SUCCEEDED] $(date)"
 exit 0
@@ -102,7 +103,19 @@ exit 0
 
 ### Registering jobs
 
-Edit `jobs.json` to register tasks.
+The monitor looks for the configuration file in two places (in this order):
+
+1. `~/.config/monitor_cron/jobs.json` (Recommended)
+2. `jobs.json` (Project root fallback)
+
+Create the config directory and file:
+
+```bash
+mkdir -p ~/.config/monitor_cron
+nano ~/.config/monitor_cron/jobs.json
+```
+
+Then add your jobs configuration:
 
 ```json
 {
@@ -110,7 +123,7 @@ Edit `jobs.json` to register tasks.
         {
             "name": "Backup music",
             "frequency": "weekly",
-            "log_pattern": "/home/imad/logs/backup_*.log",
+            "log_pattern": "/home/your_username/logs/backup_*.log",
             "process_pattern": "backup_music.sh"
         }
     ]
@@ -127,17 +140,21 @@ Configuration breakdown:
 
 ### CLI tool
 
-The CLI tool (`cron_status.py`) checks job status from the terminal.
+The CLI tool checks job status from the terminal.
 
 ```bash
 # Quick status check
-uv run cron_status.py
+monitor-cli
 
 # View the latest log for a specific job (by ID)
-uv run cron_status.py 1
+monitor-cli 1
 ```
 
-If you want to run the CLI tool from anywhere just by typing `cron_status`, follow these steps:
+> [!NOTE]
+>
+> `monitor-cli` is an alias created during installation. It is equivalent to running `uv run python -m monitor_cron.cli`, but can be called from anywhere.
+
+If you want to run the CLI tool from anywhere, follow these steps:
 
 1. Create a new file in `/usr/local/bin/`:
 
@@ -149,8 +166,10 @@ If you want to run the CLI tool from anywhere just by typing `cron_status`, foll
 
     ```bash
     #!/bin/bash
+    PROJECT_DIR="$HOME/Projects/MonitorCronJobs"
 
-    $HOME/.local/bin/uv run $HOME/Projects/MonitorCronJobs/cron_status.py "$@"
+    # Ensure uv is used to run the project
+    uv run --directory "$PROJECT_DIR" monitor-cli "$@"
     ```
 
 3. Make the file executable:
@@ -171,32 +190,37 @@ cron_status 1
 You can run the system tray app manually:
 
 ```bash
-uv run tray_app.py
+monitor-tray
 ```
+
+> [!NOTE]
+>
+> `monitor-tray` is an alias created during installation. It is equivalent to running `uv run python -m monitor_cron.tray`, but can be called from anywhere.
 
 Or you can set it to start automatically on login.
 
 1. Create a `.desktop` file:
 
-   ```bash
-   nano ~/.config/autostart/cron_status.desktop
-   ```
+    ```bash
+    nano ~/.config/autostart/cron_status.desktop
+    ```
 
 2. Paste the following content (update the paths to match your system):
 
-   ```ini
-   [Desktop Entry]
-   Type=Application
-   Name=Cron Status
-   Comment=Monitors the status of cron jobs
-   Exec=/home/imad-saddik/.local/bin/uv run /home/imad-saddik/Projects/MonitorCronJobs/tray_app.py
-   Path=/home/imad-saddik/Projects/MonitorCronJobs
-   Icon=utilities-system-monitor
-   Terminal=false
-   Hidden=false
-   NoDisplay=false
-   X-GNOME-Autostart-enabled=true
-   ```
+    ```ini
+    [Desktop Entry]
+    Type=Application
+    Name=Cron status
+    Comment=Monitors the status of cron jobs
+    # Update the path to point to your project folder
+    Exec=/usr/bin/env uv run --directory /home/your_username/Projects/MonitorCronJobs monitor-tray
+    Path=/home/your_username/Projects/MonitorCronJobs
+    Icon=utilities-system-monitor
+    Terminal=false
+    Hidden=false
+    NoDisplay=false
+    X-GNOME-Autostart-enabled=true
+    ```
 
 > [!WARNING]
 > Use absolute paths in the `.desktop` file (not `~`), as tilde expansion may not work reliably.
