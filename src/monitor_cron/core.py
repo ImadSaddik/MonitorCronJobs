@@ -8,10 +8,16 @@ from typing import Callable
 from .enums import JobFrequency, JobStatus
 from .models import Job, JobState
 
+# Navigate up from src/monitor_cron/core.py to project root
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-# Navigate up from src/monitor_cron/ to project root
 PROJECT_ROOT = os.path.dirname(os.path.dirname(BASE_DIR))
-JOBS_FILE = os.path.join(PROJECT_ROOT, "jobs.json")
+
+# Standard config location: ~/.config/monitor_cron/jobs.json
+CONFIG_DIR = os.path.expanduser("~/.config/monitor_cron")
+CONFIG_FILE = os.path.join(CONFIG_DIR, "jobs.json")
+LOCAL_JOBS_FILE = os.path.join(PROJECT_ROOT, "jobs.json")
+
+JOBS_FILE = CONFIG_FILE if os.path.exists(CONFIG_FILE) else LOCAL_JOBS_FILE
 
 MARKER_FAILED = "[JOB FAILED]"
 MARKER_SUCCESS = "[JOB SUCCEEDED]"

@@ -1,4 +1,5 @@
 import json
+import os
 from pathlib import Path
 
 from pytest import MonkeyPatch
@@ -51,6 +52,25 @@ class TestLoadJobs:
         jobs = core.load_jobs()
 
         assert jobs == []
+
+    def test_load_jobs_from_config_dir(
+        self,
+        temp_dir: Path,
+        monkeypatch: MonkeyPatch,
+    ) -> None:
+        """Test that jobs are loaded from the config directory if the file exists."""
+        config_file = temp_dir / "config_jobs.json"
+        config_file.write_text(
+            '{"jobs": [{"name": "Config job", "frequency": "daily", "log_pattern": "test", "process_pattern": "test"}]}'
+        )
+
+        monkeypatch.setattr(os.path, "exists", lambda p: p == "/fake/config/jobs.json")
+        monkeypatch.setattr(core, "JOBS_FILE", str(config_file))
+
+        jobs = core.load_jobs()
+
+        assert len(jobs) == 1
+        assert jobs[0].name == "Config job"
 
     def test_load_jobs_invalid_json(
         self,
