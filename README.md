@@ -59,7 +59,7 @@ pip install -e .
 
 ## Configuration
 
-### The Wrapper Script
+### The wrapper script
 
 > [!IMPORTANT]
 > For the monitor to work, cron jobs **must** use a wrapper script. Do not run worker scripts directly from cron.
@@ -100,7 +100,7 @@ echo "[JOB SUCCEEDED] $(date)"
 exit 0
 ```
 
-### Registering Jobs
+### Registering jobs
 
 Edit `jobs.json` to register tasks.
 
@@ -125,7 +125,7 @@ Configuration breakdown:
 
 ## Usage
 
-### CLI Tool
+### CLI tool
 
 The CLI tool (`cron_status.py`) checks job status from the terminal.
 
